@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="match_parent LL(third height=0 weight=1) and Cl((third match_paretn))" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="100dp">
+
+        <TextView
+            android:layout_width="10dp"
+            android:layout_height="match_parent"
+            android:background="@color/gray" />
+
+        <TextView
+            android:layout_width="100dp"
+            android:layout_height="match_parent"
+            android:background="@color/colorAccent" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@color/colorPrimary" />
+
+        <TextView
+            android:layout_width="70dp"
+            android:layout_height="match_parent"
+            android:background="@color/colorPrimaryDark" />
+
+        <TextView
+            android:layout_width="50dp"
+            android:layout_height="match_parent"
+            android:background="@color/d2m_font_default_description" />
+    </LinearLayout>
+
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/black" />
+
+    <ru.yandex.yamblz.ui.layouts.CustomLayout
+        android:layout_width="match_parent"
+        android:layout_height="100dp">
+
+        <TextView
+            android:layout_width="10dp"
+            android:layout_height="match_parent"
+            android:background="@color/gray" />
+
+        <TextView
+            android:layout_width="100dp"
+            android:layout_height="match_parent"
+            android:background="@color/colorAccent" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/colorPrimary" />
+
+        <TextView
+            android:layout_width="70dp"
+            android:layout_height="match_parent"
+            android:background="@color/colorPrimaryDark" />
+
+        <TextView
+            android:layout_width="50dp"
+            android:layout_height="match_parent"
+            android:background="@color/d2m_font_default_description" />
+    </ru.yandex.yamblz.ui.layouts.CustomLayout>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="3dp"
+        android:background="@color/black" />
+</LinearLayout>
