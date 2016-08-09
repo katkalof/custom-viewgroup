@@ -37,9 +37,6 @@ public class CustomLayout extends ViewGroup {
         for (int i = 0; i < getChildCount(); ++i) {
             View child = getChildAt(i);
 
-            if (child == null) {
-                continue;
-            }
             if (child.getVisibility() == GONE) {
                 continue;
             }
