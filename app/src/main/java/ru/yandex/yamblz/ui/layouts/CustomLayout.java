@@ -24,10 +24,12 @@ public class CustomLayout extends ViewGroup {
 
     @Override
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
+        int horizontalPadding = getPaddingLeft() + getPaddingRight();
+        int verticalPadding = getPaddingTop() + getPaddingBottom();
         int totalWidth = 0;
-        int layoutWidth = MeasureSpec.getSize(widthMeasureSpec);
+        int layoutWidth = MeasureSpec.getSize(widthMeasureSpec) - horizontalPadding;
         //Высота лейаута по высоте максимального элемента
-        int maxHeight = MeasureSpec.getSize(heightMeasureSpec);
+        int maxHeight = MeasureSpec.getSize(heightMeasureSpec) - verticalPadding;
         int changedHeightMeasureSpec = heightMeasureSpec;
 
         //Родитель может вызвать onMeasure не единожды
@@ -56,7 +58,6 @@ public class CustomLayout extends ViewGroup {
                     }
             }
         }
-
         //Если осталось место или оно не ограничено, почему бы не показать matchParent
         if ((totalWidth < layoutWidth) || widthMeasureSpec == MeasureSpec.makeMeasureSpec(0, MeasureSpec.UNSPECIFIED)) {
             //В случае, если не знаем ширина родителя не остановленна,используем  вдвое увеличенную ширину не match_parent элементов
@@ -65,7 +66,15 @@ public class CustomLayout extends ViewGroup {
             int mpChildWidth = (layoutWidth - totalWidth) / mMatchParentChildren.size();
             int childWidthMeasureSpec = MeasureSpec.makeMeasureSpec(mpChildWidth, MeasureSpec.EXACTLY);
             for (int i = 0; i < mMatchParentChildren.size(); i++) {
-                measureChild(mMatchParentChildren.get(i), childWidthMeasureSpec, changedHeightMeasureSpec);
+                int childHeightMeasureSpec = getChildMeasureSpec(
+                        heightMeasureSpec,
+                        verticalPadding,
+                        mMatchParentChildren.get(i).getLayoutParams().height
+                );
+                mMatchParentChildren.get(i).measure(
+                        childWidthMeasureSpec,
+                        childHeightMeasureSpec
+                );
                 totalWidth += mMatchParentChildren.get(i).getMeasuredWidth();
                 int measuredHeight = mMatchParentChildren.get(i).getMeasuredHeight();
                 if (maxHeight < measuredHeight) {
@@ -74,7 +83,7 @@ public class CustomLayout extends ViewGroup {
                 }
             }
         }
-        super.onMeasure(MeasureSpec.makeMeasureSpec(layoutWidth, MeasureSpec.EXACTLY), changedHeightMeasureSpec);
+        super.onMeasure(MeasureSpec.makeMeasureSpec(layoutWidth + horizontalPadding, MeasureSpec.EXACTLY), changedHeightMeasureSpec);
     }
 
     @Override
