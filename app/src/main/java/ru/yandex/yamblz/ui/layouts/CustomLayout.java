@@ -59,7 +59,10 @@ public class CustomLayout extends ViewGroup {
             }
         }
         //Если осталось место или оно не ограничено, почему бы не показать matchParent
-        if ((totalWidth < layoutWidth) || widthMeasureSpec == MeasureSpec.makeMeasureSpec(0, MeasureSpec.UNSPECIFIED)) {
+        boolean haveSpace = (totalWidth < layoutWidth)
+                || widthMeasureSpec == MeasureSpec.makeMeasureSpec(0, MeasureSpec.UNSPECIFIED);
+        //И у нас есть, чем его заполнять
+        if ((mMatchParentChildren.size() > 0) && haveSpace) {
             //В случае, если не знаем ширина родителя не остановленна,используем  вдвое увеличенную ширину не match_parent элементов
             layoutWidth = layoutWidth != 0 ? layoutWidth : totalWidth * 2;
             //Остаток разделям между оставшимися детьми
